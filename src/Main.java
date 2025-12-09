@@ -7,6 +7,7 @@ import creational.prototype.WelcomeEmail;
 import structural.adapter.CheckoutService;
 import structural.adapter.PayUGateway;
 import structural.adapter.RazorpayAdapter;
+import structural.decorator.*;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -35,9 +36,14 @@ public class Main {
 
 
         // Adapter
-        CheckoutService checkoutService = new CheckoutService(new PayUGateway());
-        checkoutService.checkout("12",1200);
-        CheckoutService checkoutService1 = new CheckoutService(new RazorpayAdapter());
-        checkoutService1.checkout("12",1200);
+//        CheckoutService checkoutService = new CheckoutService(new PayUGateway());
+//        checkoutService.checkout("12",1200);
+//        CheckoutService checkoutService1 = new CheckoutService(new RazorpayAdapter());
+//        checkoutService1.checkout("12",1200);
+
+        // Decorator
+        Pizza margheritaCheesePizza = new ExtraCheese(new PlainPizza());
+        Pizza oliveCheese = new Olives(margheritaCheesePizza);
+        System.out.println(oliveCheese.getDescription());
     }
 }
