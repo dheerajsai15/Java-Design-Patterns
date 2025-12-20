@@ -7,7 +7,13 @@ import creational.prototype.WelcomeEmail;
 import structural.adapter.CheckoutService;
 import structural.adapter.PayUGateway;
 import structural.adapter.RazorpayAdapter;
+import structural.composite.CartItem;
+import structural.composite.Product;
+import structural.composite.ProductBundle;
 import structural.decorator.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -42,8 +48,43 @@ public class Main {
 //        checkoutService1.checkout("12",1200);
 
         // Decorator
-        Pizza margheritaCheesePizza = new ExtraCheese(new PlainPizza());
-        Pizza oliveCheese = new Olives(margheritaCheesePizza);
-        System.out.println(oliveCheese.getDescription());
+//        Pizza margheritaCheesePizza = new ExtraCheese(new PlainPizza());
+//        Pizza oliveCheese = new Olives(margheritaCheesePizza);
+//        System.out.println(oliveCheese.getDescription());
+
+        //Composite
+        // Individual Products
+        CartItem book = new Product("Atomic Habits", 499);
+        CartItem phone = new Product("iPhone 15", 79999);
+        CartItem earbuds = new Product("AirPods", 15999);
+        CartItem charger = new Product("20W Charger", 1999);
+
+        // Combo Deal
+        ProductBundle iphoneCombo = new ProductBundle("iPhone Essentials Combo");
+        iphoneCombo.addProduct(phone);
+        iphoneCombo.addProduct(earbuds);
+        iphoneCombo.addProduct(charger);
+
+        // Back to School Kit
+        ProductBundle schoolKit = new ProductBundle("Back to School Kit");
+        schoolKit.addProduct(new Product("Notebook Pack", 249));
+        schoolKit.addProduct(new Product("Pen Set", 99));
+        schoolKit.addProduct(new Product("Highlighter", 149));
+
+        // Add everything to cart
+        List<CartItem> cart = new ArrayList<>();
+        cart.add(book);
+        cart.add(iphoneCombo);
+        cart.add(schoolKit);
+
+        // Display cart
+        System.out.println("Your Amazon Cart:");
+        double total = 0;
+        for (CartItem item : cart) {
+            item.display("  ");
+            total += item.getPrice();
+        }
+
+        System.out.println("\nTotal: ₹" + total);
     }
 }
