@@ -7,6 +7,7 @@ import creational.prototype.WelcomeEmail;
 import structural.adapter.CheckoutService;
 import structural.adapter.PayUGateway;
 import structural.adapter.RazorpayAdapter;
+import structural.bridge.*;
 import structural.composite.CartItem;
 import structural.composite.Product;
 import structural.composite.ProductBundle;
@@ -91,13 +92,20 @@ public class Main {
 
 
         // Proxy Pattern
-        VideoDownloader cacheVideoDownloader = new CachedVideoDownloader();
-        System.out.println("User 1 tries to download the video.");
-        cacheVideoDownloader.downloadVideo("https://video.com/proxy-pattern");
+//        VideoDownloader cacheVideoDownloader = new CachedVideoDownloader();
+//        System.out.println("User 1 tries to download the video.");
+//        cacheVideoDownloader.downloadVideo("https://video.com/proxy-pattern");
+//
+//        System.out.println();
+//
+//        System.out.println("User 2 tries to download the same video again.");
+//        cacheVideoDownloader.downloadVideo("https://video.com/proxy-pattern");
 
-        System.out.println();
+        // Bridge Pattern
+        VideoPlayer player1 = new WebPlayer(new HDQuality());
+        player1.play("bridge-pattern");
 
-        System.out.println("User 2 tries to download the same video again.");
-        cacheVideoDownloader.downloadVideo("https://video.com/proxy-pattern");
+        VideoPlayer player2 = new MobilePlayer(new UltraHDQuality());
+        player2.play("bridge-pattern");
     }
 }
