@@ -12,6 +12,7 @@ import structural.composite.CartItem;
 import structural.composite.Product;
 import structural.composite.ProductBundle;
 import structural.decorator.*;
+import structural.flyweight.Forest;
 import structural.proxy.CachedVideoDownloader;
 import structural.proxy.VideoDownloader;
 
@@ -102,10 +103,18 @@ public class Main {
 //        cacheVideoDownloader.downloadVideo("https://video.com/proxy-pattern");
 
         // Bridge Pattern
-        VideoPlayer player1 = new WebPlayer(new HDQuality());
-        player1.play("bridge-pattern");
+//        VideoPlayer player1 = new WebPlayer(new HDQuality());
+//        player1.play("bridge-pattern");
+//
+//        VideoPlayer player2 = new MobilePlayer(new UltraHDQuality());
+//        player2.play("bridge-pattern");
 
-        VideoPlayer player2 = new MobilePlayer(new UltraHDQuality());
-        player2.play("bridge-pattern");
+        // Flyweight Pattern
+        Forest forest = new Forest();
+        // Planting 1 million trees
+        for(int i = 0; i < 1000000; i++) {
+            forest.plantTree(i, i, "Oak", "Green", "Rough");
+        }
+        System.out.println("Planted 1 million trees.");
     }
 }
