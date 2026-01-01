@@ -2,6 +2,9 @@ import behavioural.iterator.PlaylistIterator;
 import behavioural.iterator.Video;
 import behavioural.iterator.YoutubePlaylist;
 import behavioural.iterator.YoutubePlaylistIterator;
+import behavioural.observer.EmailSubscriber;
+import behavioural.observer.MobileAppSubscriber;
+import behavioural.observer.YoutubeChannel;
 import creational.abstractFactory.IndiaFactory;
 import creational.abstractFactory.USFactory;
 import creational.builder.BurgerMeal;
@@ -122,14 +125,20 @@ public class Main {
 //        System.out.println("Planted 1 million trees.");
 
         // Iterator Pattern
-        YoutubePlaylist playlist = new YoutubePlaylist();
-        playlist.addVideo(new Video("LLD Tutorial"));
-        playlist.addVideo(new Video("System Design Basics"));
+//        YoutubePlaylist playlist = new YoutubePlaylist();
+//        playlist.addVideo(new Video("LLD Tutorial"));
+//        playlist.addVideo(new Video("System Design Basics"));
+//
+//        PlaylistIterator iterator = playlist.createIterator();
+//
+//        while (iterator.hasNext()){
+//            System.out.println(iterator.next().getTitle());
+//        }
 
-        PlaylistIterator iterator = playlist.createIterator();
-
-        while (iterator.hasNext()){
-            System.out.println(iterator.next().getTitle());
-        }
+        // Observer Pattern
+        YoutubeChannel tuf = new YoutubeChannel("TakeUForward");
+        tuf.subscribe(new MobileAppSubscriber("Dheeraj"));
+        tuf.subscribe(new EmailSubscriber("vnr@rnv.com"));
+        tuf.uploadVideo("observer-pattern");
     }
 }
