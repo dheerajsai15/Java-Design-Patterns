@@ -5,6 +5,9 @@ import behavioural.iterator.YoutubePlaylistIterator;
 import behavioural.observer.EmailSubscriber;
 import behavioural.observer.MobileAppSubscriber;
 import behavioural.observer.YoutubeChannel;
+import behavioural.strategy.AirportQueueStrategy;
+import behavioural.strategy.NearestDriverStrategy;
+import behavioural.strategy.RideMatchingService;
 import creational.abstractFactory.IndiaFactory;
 import creational.abstractFactory.USFactory;
 import creational.builder.BurgerMeal;
@@ -136,9 +139,19 @@ public class Main {
 //        }
 
         // Observer Pattern
-        YoutubeChannel tuf = new YoutubeChannel("TakeUForward");
-        tuf.subscribe(new MobileAppSubscriber("Dheeraj"));
-        tuf.subscribe(new EmailSubscriber("vnr@rnv.com"));
-        tuf.uploadVideo("observer-pattern");
+//        YoutubeChannel tuf = new YoutubeChannel("TakeUForward");
+//        tuf.subscribe(new MobileAppSubscriber("Dheeraj"));
+//        tuf.subscribe(new EmailSubscriber("vnr@rnv.com"));
+//        tuf.uploadVideo("observer-pattern");
+
+        strategyPattern();
+    }
+
+    private static void strategyPattern(){
+        RideMatchingService rideMatchingService = new RideMatchingService(new AirportQueueStrategy());
+        rideMatchingService.matchRider("Hyd");
+
+        RideMatchingService rideMatchingService1 = new RideMatchingService(new NearestDriverStrategy());
+        rideMatchingService1.matchRider("Blr");
     }
 }
