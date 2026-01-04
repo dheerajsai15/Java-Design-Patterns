@@ -9,6 +9,9 @@ import behavioural.observer.YoutubeChannel;
 import behavioural.strategy.AirportQueueStrategy;
 import behavioural.strategy.NearestDriverStrategy;
 import behavioural.strategy.RideMatchingService;
+import behavioural.template.EmailNotification;
+import behavioural.template.NotificationSender;
+import behavioural.template.SMSNotification;
 import creational.abstractFactory.IndiaFactory;
 import creational.abstractFactory.USFactory;
 import creational.builder.BurgerMeal;
@@ -146,7 +149,8 @@ public class Main {
 //        tuf.uploadVideo("observer-pattern");
 
         //strategyPattern();
-        commandPattern();
+        //commandPattern();
+        templatePattern();
     }
 
     private static void strategyPattern(){
@@ -177,5 +181,15 @@ public class Main {
         remote.pressButton(1); // Light OFF
         remote.pressUndo();    // Undo Light OFF -> Light ON
         remote.pressUndo();    // Undo AC ON -> AC OFF
+    }
+
+    private static void templatePattern(){
+        NotificationSender emailSender = new EmailNotification();
+        emailSender.send("john@example.com", "Welcome to TUF+!");
+
+        System.out.println(" ");
+
+        NotificationSender smsSender = new SMSNotification();
+        smsSender.send("9876543210", "Your OTP is 4567.");
     }
 }
