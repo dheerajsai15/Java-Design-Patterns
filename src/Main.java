@@ -6,6 +6,7 @@ import behavioural.iterator.YoutubePlaylistIterator;
 import behavioural.observer.EmailSubscriber;
 import behavioural.observer.MobileAppSubscriber;
 import behavioural.observer.YoutubeChannel;
+import behavioural.state.OrderContext;
 import behavioural.strategy.AirportQueueStrategy;
 import behavioural.strategy.NearestDriverStrategy;
 import behavioural.strategy.RideMatchingService;
@@ -150,7 +151,8 @@ public class Main {
 
         //strategyPattern();
         //commandPattern();
-        templatePattern();
+        //templatePattern();
+        statePattern();
     }
 
     private static void strategyPattern(){
@@ -191,5 +193,22 @@ public class Main {
 
         NotificationSender smsSender = new SMSNotification();
         smsSender.send("9876543210", "Your OTP is 4567.");
+    }
+
+    private static void statePattern(){
+        OrderContext order = new OrderContext();
+
+        // Display initial state
+        System.out.println("Current State: " + order.getCurrentState());
+
+        // Moving through states
+        order.next();  // ORDER_PLACED -> PREPARING
+        order.next();  // PREPARING -> OUT_FOR_DELIVERY
+        order.cancel(); // Should fail, as order is out for delivery
+        order.next();  // OUT_FOR_DELIVERY -> DELIVERED
+        order.cancel(); // Should fail, as order is delivered
+
+        // Display final state
+        System.out.println("Final State: " + order.getCurrentState());
     }
 }
