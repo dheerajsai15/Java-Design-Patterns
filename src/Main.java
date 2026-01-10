@@ -14,6 +14,7 @@ import behavioural.strategy.RideMatchingService;
 import behavioural.template.EmailNotification;
 import behavioural.template.NotificationSender;
 import behavioural.template.SMSNotification;
+import behavioural.visitor.*;
 import creational.abstractFactory.IndiaFactory;
 import creational.abstractFactory.USFactory;
 import creational.builder.BurgerMeal;
@@ -154,7 +155,25 @@ public class Main {
         //commandPattern();
         //templatePattern();
         //statePattern();
-        chainOfResponsibilityPattern();
+        //chainOfResponsibilityPattern();
+        visitor();
+    }
+
+    private static void visitor(){
+        List<Item> items = new ArrayList<>();
+        items.add(new PhysicalProduct("Shoes", 1.2));
+        items.add(new DigitalProduct("Ebook", 100));
+        items.add(new GiftCard("TUF500", 500));
+
+        ItemVisitor invoiceGenerator = new InvoiceVisitor();
+        ItemVisitor shippingCalculator = new ShippingCostVisitor();
+
+        for (Item item : items) {
+            item.accept(invoiceGenerator);
+            item.accept(shippingCalculator);
+
+            System.out.println("");
+        }
     }
 
     private static void chainOfResponsibilityPattern(){
